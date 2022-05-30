@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/challenge-cats/static/css/main.09698c69.css",
-    "main.js": "/challenge-cats/static/js/main.996bac79.js",
+    "main.js": "/challenge-cats/static/js/main.264e566f.js",
     "index.html": "/challenge-cats/index.html",
     "main.09698c69.css.map": "/challenge-cats/static/css/main.09698c69.css.map",
-    "main.996bac79.js.map": "/challenge-cats/static/js/main.996bac79.js.map"
+    "main.264e566f.js.map": "/challenge-cats/static/js/main.264e566f.js.map"
   },
   "entrypoints": [
     "static/css/main.09698c69.css",
-    "static/js/main.996bac79.js"
+    "static/js/main.264e566f.js"
   ]
 }
