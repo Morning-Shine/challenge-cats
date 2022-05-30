@@ -11,7 +11,7 @@ export const fetchCats = createAsyncThunk(
     async function (_, { rejectWithValue }) {
         try {
             // const link = `https://api.thecatapi.com/v1/images/search?limit=42&page=${_.currentPage}&order=random&size=small` //для беск. скролла
-            const link = `https://api.thecatapi.com/v1/images/search?limit=20&order=random&size=small`
+            const link = `https://api.thecatapi.com/v1/images/search?limit=40&order=random&size=small`
             const response = await fetch(
                 link, {
                 // headers: { 'x-api-key': 'b899d940-c77a-48d6-8902-a7eb2e04d023' }
