@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/challenge-cats/static/css/main.09698c69.css",
+    "main.js": "/challenge-cats/static/js/main.5f2c5b30.js",
+    "index.html": "/challenge-cats/index.html",
+    "main.09698c69.css.map": "/challenge-cats/static/css/main.09698c69.css.map",
+    "main.5f2c5b30.js.map": "/challenge-cats/static/js/main.5f2c5b30.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.09698c69.css",
+    "static/js/main.5f2c5b30.js"
+  ]
+}
