@@ -8,10 +8,13 @@ const initialState = {
 
 export const fetchCats = createAsyncThunk(
     'cats/fetchCats',
-    async function (_, { rejectWithValue }) {
+    async function (currentPage, { rejectWithValue }) {
         try {
-            // const link = `https://api.thecatapi.com/v1/images/search?limit=42&page=${_.currentPage}&order=random&size=small` //для беск. скролла
-            const link = `https://api.thecatapi.com/v1/images/search?limit=40&order=random&size=small`
+            // console.log('currentPage: ', currentPage);
+            const link = `https://api.thecatapi.com/v1/images/search?limit=2&order=random&size=small` //для беск. скролла
+            // const link = `https://api.thecatapi.com/v1/images/search?limit=2&page=${currentPage}&order=random&size=small` //для беск. скролла
+            // console.log('link: ', link);
+            // const link = `https://api.thecatapi.com/v1/images/search?limit=40&order=random&size=small`
             const response = await fetch(
                 link, {
                 // headers: { 'x-api-key': 'b899d940-c77a-48d6-8902-a7eb2e04d023' }
@@ -34,8 +37,10 @@ const catsSlice = createSlice({
             state.error = null;
         },
         [fetchCats.fulfilled]: (state, action) => {
+            // console.log('action: ', action);
             state.status = 'resolved';
-            state.cats = action.payload;
+            state.cats = [...state.cats, ...action.payload];
+            // state.cats = action.payload;
         },
         [fetchCats.rejected]: (state, action) => {
             state.status = 'rejected';
