@@ -14,6 +14,7 @@ import catsSlice from "./catsSlice";
 import favoriteCatsSlice from "./favoriteCatsSlice";
 
 
+
 const persistConfig = {
     key: "root",
     storage,
@@ -22,7 +23,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     cats: catsSlice,
-    favoriteCats: favoriteCatsSlice
+    favoriteCats: favoriteCatsSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

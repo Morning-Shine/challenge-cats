@@ -11,7 +11,6 @@ export default function ScreenAllCats() {
   useEffect(() => {
     if (!cats.length) {
       dispatch(fetchCats());
-      console.log('useEffect запущен dispatch(fetchCats())');
     }
   }, [cats.length, dispatch]);
 

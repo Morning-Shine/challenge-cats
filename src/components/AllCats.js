@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Guid } from 'js-guid';
 import CardCat from '../components/CardCat';
 import styled from "@emotion/styled";
 import { fetchCats } from '../store/catsSlice';
@@ -10,14 +11,12 @@ import { trottle } from '../utils/trottle';
 export default function AllCats() {
     const { cats, status, error } = useSelector(state => state.cats);
     const dispatch = useDispatch();
-    const lastCallFuncScrollHeight = useRef(0);
+    const lastCallFuncScrollHeight = useRef(document.documentElement.offsetTop + document.documentElement.offsetHeight);
 
-    console.log('lastCallFuncScrollHeight: ', lastCallFuncScrollHeight.current);
-    
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler);
         return function () {
-            document.removeEventListener('scroll', scrollHandler)
+            document.removeEventListener('scroll', scrollHandler);
         }
     }, []);
 
@@ -25,10 +24,9 @@ export default function AllCats() {
         const scrollHeight = e.target.documentElement.scrollHeight;
         const scrollTop = e.target.documentElement.scrollTop;
         const clientHeight = e.target.documentElement.clientHeight;
-        if (scrollHeight - scrollTop - clientHeight < 321 //TODO добавить переменную в css (225+48*2)
+        if (scrollHeight - scrollTop - clientHeight < 225
             && scrollHeight > lastCallFuncScrollHeight.current
         ) {
-            // console.log('-----: ', scrollHeight - scrollTop - clientHeight);
             dispatch(fetchCats());
             lastCallFuncScrollHeight.current = scrollHeight;
         }
@@ -47,11 +45,14 @@ export default function AllCats() {
                     Получить котиков
                 </button> */}
                 {cats
-                    ? cats.map(item => <CardCat key={item.id} item={item} />)
+                    ? cats.map(item =>
+                        <CardCat
+                            key={Guid.newGuid().StringGuid}
+                            item={item}
+                        />)
                     : null
                 }
             </Cont>
-            {/* <P>... загружаем ещё котиков ...</P> */}
             {status === 'loading' && <P>... загружаем ещё котиков ...</P>}
             {error && <P>ошибка загрузки данных: {error}</P>}
         </>

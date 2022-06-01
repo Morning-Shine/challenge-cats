@@ -10,7 +10,6 @@ const setActive = ({ isActive }) => ({
 });
 
 export default function AppBarBtn({ text, routing }) {
-    // console.log(routing);
     return (
         <StyledLink
             to={routing}
