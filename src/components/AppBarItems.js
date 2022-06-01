@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
+import { Guid } from 'js-guid';
 import AppBarBtn from './AppBarBtn';
 import styled from "@emotion/styled";
 import { APP_BAR_HEIGHT } from "../constants/CSS_DIMENTIONS";
@@ -11,7 +12,7 @@ export default function AppBarItems() {
         <Cont>
             {MENU_ITEMS.map(item => (
                 <AppBarBtn
-                    key={item.text}
+                    key={Guid.newGuid().StringGuid}
                     text={item.text}
                     routing={item.routing}
                 />)

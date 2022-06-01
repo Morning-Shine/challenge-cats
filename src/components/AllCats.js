@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CardCat from '../components/CardCat';
 import styled from "@emotion/styled";
 import { fetchCats } from '../store/catsSlice';
 import { APP_BAR_HEIGHT, LEFT_INDENT_MAIN } from '../constants/CSS_DIMENTIONS';
-
+import { trottle } from '../utils/trottle';
 
 
 export default function AllCats() {
     const { cats, status, error } = useSelector(state => state.cats);
     const dispatch = useDispatch();
+    const lastCallFuncScrollHeight = useRef(0);
+
+    console.log('lastCallFuncScrollHeight: ', lastCallFuncScrollHeight.current);
+    
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler);
+        return function () {
+            document.removeEventListener('scroll', scrollHandler)
+        }
+    }, []);
+
+    const scrollHandler = (e) => {
+        const scrollHeight = e.target.documentElement.scrollHeight;
+        const scrollTop = e.target.documentElement.scrollTop;
+        const clientHeight = e.target.documentElement.clientHeight;
+        if (scrollHeight - scrollTop - clientHeight < 321 //TODO добавить переменную в css (225+48*2)
+            && scrollHeight > lastCallFuncScrollHeight.current
+        ) {
+            // console.log('-----: ', scrollHeight - scrollTop - clientHeight);
+            dispatch(fetchCats());
+            lastCallFuncScrollHeight.current = scrollHeight;
+        }
+    }
 
     return (
         <>
             <Cont>
-                <button
+                {/* <button
                     style={{ height: '50px', width: '100px' }}
                     onClick={() => {
                         dispatch(fetchCats());
@@ -22,7 +45,7 @@ export default function AllCats() {
                     }}
                 >
                     Получить котиков
-                </button>
+                </button> */}
                 {cats
                     ? cats.map(item => <CardCat key={item.id} item={item} />)
                     : null
