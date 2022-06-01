@@ -8,14 +8,14 @@ import clickedHeart from '../assets/img/heart_clicked.png';
 
 
 
-export default function CardCatHeart({ visible, item }) {
+export default function CardCatHeart({ hidden, item }) {
     const dispatch = useDispatch();
     const isFavorite = useSelector(state => state.favoriteCats.cats.find(cat => cat.id === item.id));
     const [heart, setHeart] = useState(isFavorite ? clickedHeart : emptyHeart);
 
     return (
         <Heart
-            hidden={visible}
+            hidden={hidden}
             onMouseOver={isFavorite ? null : () => setHeart(hoveredHeart)}
             onMouseLeave={isFavorite ? null : () => setHeart(emptyHeart)}
             onClick={
