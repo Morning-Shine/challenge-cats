@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CardCat from '../components/CardCat';
 import styled from "@emotion/styled";
-import { APP_BAR_HEIGHT, LEFT_INDENT_MAIN } from '../constants/CSS_DIMENTIONS';
+import {
+  APP_BAR_HEIGHT,
+  LEFT_INDENT_MAIN,
+  MEDIA_TABLET_WIDTH,
+  MEDIA_PHONE_WIDTH,
+  CARDS_MARGIN_PHONE
+ } from '../constants/CSS_DIMENTIONS';
 
 
 export default function ScreenFavoriteCats() {
   const cats = useSelector(state => state.favoriteCats.cats);
+
+  // useEffect(() => {
+  //   document.addEventListener('scroll', scrollHandler);
+  //   return function () {
+  //     document.removeEventListener('scroll', scrollHandler);
+  //   }
+  // })
+
+  // const scrollHandler = (e) => {
+  //   console.log('FavoriteCats, window.pageYOffset: ', window.pageYOffset);
+  // }
 
   return (
     <Cont>
@@ -21,4 +38,11 @@ const Cont = styled.div`
   column-gap: 48px;
   row-gap: 48px;
   grid-template-columns: repeat( auto-fill, minmax(225px, 1fr) );
+      @media (max-width: ${MEDIA_TABLET_WIDTH}px) {
+        justify-items: center;
+    }
+    @media (max-width: ${MEDIA_PHONE_WIDTH}px) {
+        margin: calc(${CARDS_MARGIN_PHONE}px + ${APP_BAR_HEIGHT}px) ${CARDS_MARGIN_PHONE}px auto ${CARDS_MARGIN_PHONE}px;
+        grid-template-columns: 1fr
+    }
 `

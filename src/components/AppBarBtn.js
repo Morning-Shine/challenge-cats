@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "@emotion/styled";
 import { COLOR_PRIMARY_ACTIVE } from '../constants/CSS_COLORS';
 import { NavLink } from "react-router-dom";
+import { MEDIA_TABLET_WIDTH } from '../constants/CSS_DIMENTIONS';
+import { MENU_ITEMS } from '../constants/ROUTS';
 
 
 const setActive = ({ isActive }) => ({
@@ -14,6 +16,7 @@ export default function AppBarBtn({ text, routing }) {
         <StyledLink
             to={routing}
             style={setActive}
+        // onClick={() => console.log("из меню. window.pageYOffset: ", window.pageYOffset)}
         >
             <LinkName>
                 {text}
@@ -39,4 +42,10 @@ const LinkName = styled.div`
             text-align: center;
             width: 100%;
             margin: auto 30px;
+            @media (max-width: ${MEDIA_TABLET_WIDTH}px) {
+                font-size: 20px;
+                line-height: 20px;
+                width: calc(100vw / ${MENU_ITEMS.length});
+                margin: auto
+            }
             `

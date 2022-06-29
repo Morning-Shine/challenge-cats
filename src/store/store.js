@@ -13,7 +13,7 @@ import storage from "redux-persist/lib/storage";
 import catsSlice from "./catsSlice";
 import favoriteCatsSlice from "./favoriteCatsSlice";
 import viewCatSlice from "./viewCatSlice";
-
+import allCatsCurrentScrollSlice from "./allCatsCurrentScrollSlice";
 
 
 const persistConfig = {
@@ -25,7 +25,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     cats: catsSlice,
     favoriteCats: favoriteCatsSlice,
-    viewCat: viewCatSlice
+    viewCat: viewCatSlice,
+    scrollAllCats: allCatsCurrentScrollSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
