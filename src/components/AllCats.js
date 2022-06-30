@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Guid } from 'js-guid';
 import CardCat from '../components/CardCat';
 import styled from "@emotion/styled";
@@ -12,19 +13,15 @@ import {
     MEDIA_TABLET_WIDTH,
     MEDIA_PHONE_WIDTH
 } from '../constants/CSS_DIMENTIONS';
-import { trottle } from '../utils/trottle';
-import { changeScrollHeight } from '../store/allCatsCurrentScrollSlice';
-// import { useLocation } from 'react-router-dom';
 
 
 export default function AllCats() {
     const { cats, status, error } = useSelector(state => state.cats);
-    // const currentTopScroll = useSelector(state => state.scrollAllCats.scrollTopAllCats);
+    const location = useLocation();
+    const currentTopScroll = useSelector(state => state.currentScroll[location.pathname]);
     const dispatch = useDispatch();
     const lastCallFuncScrollHeight = useRef(document.documentElement.offsetTop + document.documentElement.offsetHeight);
-    // let location = useLocation();
-    // if (currentTopScroll > 0) window.scrollTo(0, currentTopScroll);
-    // console.log('currentScroll: ', currentTopScroll);
+
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler);
@@ -32,6 +29,11 @@ export default function AllCats() {
             document.removeEventListener('scroll', scrollHandler);
         }
     }, []);
+
+    useEffect(() => {
+        if (currentTopScroll > 0) window.scrollTo(0, currentTopScroll)
+    }, [location, currentTopScroll]);
+
 
     const scrollHandler = (e) => {
         const scrollHeight = e.target.documentElement.scrollHeight;

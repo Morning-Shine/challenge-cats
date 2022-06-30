@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import CardCat from '../components/CardCat';
 import styled from "@emotion/styled";
 import {
@@ -13,17 +14,12 @@ import {
 
 export default function ScreenFavoriteCats() {
   const cats = useSelector(state => state.favoriteCats.cats);
+  let location = useLocation();
+  const currentTopScroll = useSelector(state => state.currentScroll[location.pathname]);
 
-  // useEffect(() => {
-  //   document.addEventListener('scroll', scrollHandler);
-  //   return function () {
-  //     document.removeEventListener('scroll', scrollHandler);
-  //   }
-  // })
-
-  // const scrollHandler = (e) => {
-  //   console.log('FavoriteCats, window.pageYOffset: ', window.pageYOffset);
-  // }
+  
+  useEffect(() => { if (currentTopScroll > 0) window.scrollTo(0, currentTopScroll) },
+    [location, currentTopScroll]);
 
   return (
     <Cont>

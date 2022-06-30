@@ -1,9 +1,12 @@
 import React from 'react';
-import styled from "@emotion/styled";
-import { COLOR_PRIMARY_ACTIVE } from '../constants/CSS_COLORS';
 import { NavLink } from "react-router-dom";
-import { MEDIA_TABLET_WIDTH } from '../constants/CSS_DIMENTIONS';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { changeScrollHeight } from '../store/currentScrollSlice';
+import styled from "@emotion/styled";
 import { MENU_ITEMS } from '../constants/ROUTS';
+import { COLOR_PRIMARY_ACTIVE } from '../constants/CSS_COLORS';
+import { MEDIA_TABLET_WIDTH } from '../constants/CSS_DIMENTIONS';
 
 
 const setActive = ({ isActive }) => ({
@@ -12,11 +15,18 @@ const setActive = ({ isActive }) => ({
 });
 
 export default function AppBarBtn({ text, routing }) {
+    let location = useLocation();
+    const dispatch = useDispatch();
+
     return (
         <StyledLink
             to={routing}
             style={setActive}
-        // onClick={() => console.log("из меню. window.pageYOffset: ", window.pageYOffset)}
+            onClick={() => {
+                dispatch(changeScrollHeight({ path: location.pathname, height: window.pageYOffset }))
+                // console.log('по клику: location: ', location);
+                console.log('window.pageYOffset: ', window.pageYOffset)
+            }}
         >
             <LinkName>
                 {text}

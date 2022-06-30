@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    scrollTopAllCats: 0
+    // scrollTopAllCats: 0
 };
 
 
-const allCatsCurrentScrollSlice = createSlice({
-    name: 'allCatsCurrentScrollSlice',
+const currentScrollSlice = createSlice({
+    name: 'currentScrollSlice',
     initialState,
     reducers: {
         // addFavoriteCat(state, action) {
@@ -16,11 +16,11 @@ const allCatsCurrentScrollSlice = createSlice({
         //     });
         // },
         changeScrollHeight(state, action) {
-            console.log(action);
-            state.scrollTopAllCats = action.payload
+            state[action.payload.path] = action.payload.height;
+            // console.log(action);
         }
     }
 });
 
-export const { changeScrollHeight } = allCatsCurrentScrollSlice.actions;
-export default allCatsCurrentScrollSlice.reducer;
+export const { changeScrollHeight } = currentScrollSlice.actions;
+export default currentScrollSlice.reducer;
