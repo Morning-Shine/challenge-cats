@@ -24,8 +24,6 @@ export default function AppBarBtn({ text, routing }) {
             style={setActive}
             onClick={() => {
                 dispatch(changeScrollHeight({ path: location.pathname, height: window.pageYOffset }))
-                // console.log('по клику: location: ', location);
-                console.log('window.pageYOffset: ', window.pageYOffset)
             }}
         >
             <LinkName>
