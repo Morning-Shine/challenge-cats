@@ -10,10 +10,10 @@ export const fetchCats = createAsyncThunk(
     'cats/fetchCats',
     async function (_, { rejectWithValue }) {
         try {
-            const link = `https://api.thecatapi.com/v1/images/search?limit=30&order=random&size=small` //для беск. скролла
+            const link = `https://api.thecatapi.com/v1/images/search?limit=30&order=random&size=small`
             const response = await fetch(
                 link, {
-                // headers: { 'x-api-key': 'b899d940-c77a-48d6-8902-a7eb2e04d023' }
+                headers: { 'x-api-key': 'b899d940-c77a-48d6-8902-a7eb2e04d023' }
             });
             if (!response.ok) throw new Error('ошибка получения данных от сервера');
             const data = await response.json();
