@@ -1,6 +1,6 @@
 {
   "homepage": "https://morning-shine.github.io/challenge-cats/",
-  "name": "test_uchiru",
+  "name": "challenge-cats",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
